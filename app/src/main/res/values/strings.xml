@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">MConverter</string>
+    <string-array name="taxes">
+        <item>0%</item>
+        <item>2%</item>
+    </string-array>
+</resources>
