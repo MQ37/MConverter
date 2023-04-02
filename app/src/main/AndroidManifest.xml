@@ -17,7 +17,7 @@
             android:name=".CalculatorActivity"
             android:exported="false" />
         <activity
-            android:name=".ListingActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,32 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal" >
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="16dp">
+
     <TextView
         android:id="@+id/itemName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="mena"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:paddingEnd="8dp" />
+
     <TextView
         android:id="@+id/itemCode"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:text="kod"
-        android:textColor="#AA0000" />
+        android:textColor="#AA0000"
+        android:textSize="20sp"
+        android:paddingEnd="8dp" />
+
     <TextView
         android:id="@+id/itemAmount"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="mnozstvi" />
+        android:text="mnozstvi"
+        android:textSize="20sp"
+        android:paddingEnd="8dp" />
+
     <TextView
         android:id="@+id/itemRate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="kurz" />
+        android:text="kurz"
+        android:textSize="20sp" />
+
 </LinearLayout>
