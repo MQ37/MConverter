@@ -4,15 +4,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.icu.text.NumberFormat;
+import android.media.Image;
 import android.net.ParseException;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -24,6 +28,7 @@ public class CalculatorActivity extends AppCompatActivity implements AdapterView
     TextView fcCode;
     Spinner tax;
     TextView fullName;
+    ImageView flagView;
     private double rate;
     private double taxrate;
 
@@ -37,9 +42,21 @@ public class CalculatorActivity extends AppCompatActivity implements AdapterView
         fcCode = (TextView)findViewById(R.id.fcCode);
         tax = (Spinner)findViewById(R.id.tax);
         fullName = (TextView)findViewById(R.id.fullName);
+        flagView = (ImageView)findViewById(R.id.flag);
 
         Intent intent = getIntent();
         Bundle b = intent.getExtras();
+
+        // Get flag
+        Resources resources = getResources();
+        String countryCode = CurrencyCountryMap.currencyToCountryMap.get(b.getString("CODE"));
+        int flagId = 0;
+        if (countryCode != null) {
+            flagId = resources.getIdentifier(countryCode.toLowerCase(), "drawable", getPackageName());
+        }
+        if (flagId == 0)
+            flagId = R.drawable.ic_launcher_foreground;
+        flagView.setImageResource(flagId);
 
         fullName.setText(b.getString("NAME") + " (" + b.getString("COUNTRY") + ")");
         fcCode.setText(b.getString("CODE") + ": ");

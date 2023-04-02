@@ -21,44 +21,10 @@ import java.util.HashMap;
 public class CurrencyRecyclerViewAdapter extends RecyclerView.Adapter<CurrencyViewHolder> {
     private Cursor mc;
     private AppCompatActivity parent;
-    private HashMap<String, String> currencyToCountryMap;
 
     public CurrencyRecyclerViewAdapter(Cursor cursor, AppCompatActivity parent) {
         this.mc = cursor;
         this.parent = parent;
-        currencyToCountryMap = new HashMap<>();
-        currencyToCountryMap.put("AUD", "AU");
-        currencyToCountryMap.put("BRL", "BR");
-        currencyToCountryMap.put("BGN", "BG");
-        currencyToCountryMap.put("CNY", "CN");
-        currencyToCountryMap.put("DKK", "DK");
-        currencyToCountryMap.put("EUR", "EU");
-        currencyToCountryMap.put("PHP", "PH");
-        currencyToCountryMap.put("HKD", "HK");
-        currencyToCountryMap.put("INR", "IN");
-        currencyToCountryMap.put("IDR", "ID");
-        currencyToCountryMap.put("ISK", "IS");
-        currencyToCountryMap.put("ILS", "IL");
-        currencyToCountryMap.put("JPY", "JP");
-        currencyToCountryMap.put("ZAR", "ZA");
-        currencyToCountryMap.put("CAD", "CA");
-        currencyToCountryMap.put("KRW", "KR");
-        currencyToCountryMap.put("HUF", "HU");
-        currencyToCountryMap.put("MYR", "MY");
-        currencyToCountryMap.put("MXN", "MX");
-        //currencyToCountryMap.put("XDR", "MMF");
-        currencyToCountryMap.put("NOK", "NO");
-        currencyToCountryMap.put("NZD", "NZ");
-        currencyToCountryMap.put("PLN", "PL");
-        currencyToCountryMap.put("RON", "RO");
-        currencyToCountryMap.put("SGD", "SG");
-        currencyToCountryMap.put("SEK", "SE");
-        currencyToCountryMap.put("CHF", "CH");
-        currencyToCountryMap.put("THB", "TH");
-        currencyToCountryMap.put("TRY", "TR");
-        currencyToCountryMap.put("USD", "US");
-        currencyToCountryMap.put("GBP", "GB");
-        currencyToCountryMap.put("CZK", "CZ");
     }
 
     @NonNull
@@ -80,12 +46,12 @@ public class CurrencyRecyclerViewAdapter extends RecyclerView.Adapter<CurrencyVi
         double rate = mc.getDouble(mc.getColumnIndex(CurrencyContentProvider.RATE));
 
         Resources resources = parent.getResources();
-        String countryCode = currencyToCountryMap.get(code);
+        String countryCode = CurrencyCountryMap.currencyToCountryMap.get(code);
+
         int flagId = 0;
         if (countryCode != null) {
             flagId = resources.getIdentifier(countryCode.toLowerCase(), "drawable", parent.getPackageName());
         }
-
         if (flagId == 0)
             flagId = R.drawable.ic_launcher_foreground;
 
@@ -94,7 +60,6 @@ public class CurrencyRecyclerViewAdapter extends RecyclerView.Adapter<CurrencyVi
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("click", "click");
                 Bundle bundle = new Bundle();
                 bundle.putString("CODE", code);
                 bundle.putString("NAME", name);
@@ -104,8 +69,6 @@ public class CurrencyRecyclerViewAdapter extends RecyclerView.Adapter<CurrencyVi
                 Intent intent = new Intent(parent, CalculatorActivity.class);
                 intent.putExtras(bundle);
                 parent.startActivity(intent);
-
-
             }
         });
 
