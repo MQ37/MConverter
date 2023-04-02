@@ -21,8 +21,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 public class UpdateService extends IntentService {
+
+    public static final String ACTION_UPDATE_COMPLETED = "cz.ujep.ki.mconverter.UPDATE_COMPLETED";
+
     private static final String uri =
-            "http://www.cnb.cz/cs/financni_trhy/devizovy_trh/kurzy_devizoveho_trhu/denni_kurz.xml";
+            "https://www.cnb.cz/cs/financni_trhy/devizovy_trh/kurzy_devizoveho_trhu/denni_kurz.xml";
 
     Handler guiHandler;
     public UpdateService() {
@@ -96,6 +99,9 @@ public class UpdateService extends IntentService {
                 Toast toast = Toast.makeText(getBaseContext(), toastText, Toast.LENGTH_SHORT);
                 toast.show();
             }});
+
+        Intent updateIntent = new Intent(ACTION_UPDATE_COMPLETED);
+        sendBroadcast(updateIntent);
     }
 
     private static void putAttrString(XmlPullParser parser, String attrName,

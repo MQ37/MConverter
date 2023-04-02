@@ -26,7 +26,7 @@ public class CurrencyContentProvider extends ContentProvider {
     public final static String CONTENT_URI
             = "content://" + AUTHORITY + "/" + TABLE_NAME;
     public final static String CONTENT_TYPE
-            = "vnd.android.cursor.dir/vnd.cz.ujep.ki.android.fiser.currencies";
+            = "vnd.android.cursor.dir/vnd.cz.ujep.ki.mconverter.currencies";
 
     public final static String _ID = "_id";
     public final static String CODE = "code";

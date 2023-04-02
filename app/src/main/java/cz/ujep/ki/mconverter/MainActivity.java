@@ -6,7 +6,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -21,6 +24,7 @@ import android.widget.SimpleCursorAdapter;
 public class MainActivity extends AppCompatActivity {
 
     private static final int CURRENCY_LOADER_ID = 1;
+    private BroadcastReceiver updateReceiver;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +37,13 @@ public class MainActivity extends AppCompatActivity {
 
         CurrencyLoaderManager clm = new CurrencyLoaderManager(this, adapter);
         LoaderManager.getInstance(this).initLoader(CURRENCY_LOADER_ID, null, clm);
+
+        updateReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                adapter.notifyDataSetChanged();
+            }
+        };
     }
 
     @Override
@@ -50,5 +61,18 @@ public class MainActivity extends AppCompatActivity {
                 startService(intent);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        IntentFilter filter = new IntentFilter(UpdateService.ACTION_UPDATE_COMPLETED);
+        registerReceiver(updateReceiver, filter);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(updateReceiver);
     }
 }
