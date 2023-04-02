@@ -5,6 +5,12 @@
     android:orientation="horizontal"
     android:padding="16dp">
 
+    <ImageView
+        android:id="@+id/itemFlag"
+        android:layout_width="32sp"
+        android:layout_height="32sp"
+        android:paddingEnd="8dp" />
+
     <TextView
         android:id="@+id/itemName"
         android:layout_width="0dp"
